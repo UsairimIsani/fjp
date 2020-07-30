@@ -52,7 +52,9 @@ pub fn start(cli: &ArgMatches<'_>) {
 
     // NOTE: unwrap can't faile here, because PROFILE_NAME is required
     let profile_name = cli.value_of("PROFILE_NAME").unwrap();
+
     debug!("profile name: {}", profile_name);
+
     let user_profile = Profile::new(
         profile_name,
         NewProfileFlags::LOOKUP_USER | NewProfileFlags::DENY_BY_PATH,
@@ -60,6 +62,7 @@ pub fn start(cli: &ArgMatches<'_>) {
     .unwrap();
 
     debug!("user profile: {}", user_profile.full_name());
+
     let system_profile = Profile::new(
         profile_name,
         NewProfileFlags::LOOKUP_SYSTEM | NewProfileFlags::DENY_BY_PATH,

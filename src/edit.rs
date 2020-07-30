@@ -71,14 +71,12 @@ pub fn start(cli: &ArgMatches<'_>) {
 
     debug!("system profile: {}", &system_profile.full_name());
 
-    match (&user_profile.path(), &system_profile.path()) {
-        (Some(user_path), Some(system_path)) if flags.contains(Flags::TMP) => {
+    if let (Some(user_path), Some(system_path)) = (&user_profile.path(), &system_profile.path()) {
+        if flags.contains(Flags::TMP) {
             prepare_tmp_edit(user_path, system_path, flags);
-        }
-        (Some(user_path), Some(system_path)) => {
+        } else {
             prepare_edit(user_path, system_path, flags);
         }
-        (_, _) => error!("No Profile found with that name!"),
     }
 }
 

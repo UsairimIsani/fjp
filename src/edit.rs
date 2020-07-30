@@ -25,7 +25,7 @@ use crate::{
 };
 use bitflags::bitflags;
 use clap::ArgMatches;
-use log::{debug, info, warn};
+use log::{debug, error, info, warn};
 use std::env::var_os;
 use std::ffi::OsString;
 use std::fs::{copy as copy_file, remove_file, rename};
@@ -78,7 +78,7 @@ pub fn start(cli: &ArgMatches<'_>) {
         (Some(user_path), Some(system_path)) => {
             prepare_edit(user_path, system_path, flags);
         }
-        (_, _) => fatal!("No Profile found with that name!"),
+        (_, _) => error!("No Profile found with that name!"),
     }
 }
 
